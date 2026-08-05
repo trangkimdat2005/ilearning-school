@@ -1,0 +1,18 @@
+// SectionHeader.module.scss
+// Placeholder for SectionHeader molecule scoped styles.
+// Global styles are defined in GlobalStyles.scss (.content-text, etc.)
+// Add component-specific overrides here as needed.
+
+.content-text {
+    text-align: center;
+    font-size: clamp(1.13rem, 0.99rem + 0.53vw, 1.44rem);
+
+    line-height: 1.2;
+    font-weight: 500;
+
+    b {
+        font-size: clamp(1.44rem, 1.38rem + 0.21vw, 1.56rem);
+        font-weight: 700;
+    }
+
+}

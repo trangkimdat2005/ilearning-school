@@ -1,0 +1,28 @@
+// Logo.module.scss
+// Placeholder for Logo molecule scoped styles.
+// Global styles are defined in GlobalStyles.scss (.header-left, etc.)
+// Add component-specific overrides here as needed.
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    img {
+        width: auto;
+        height: clamp(2.625rem, calc(1.84vw + 1.74rem), 3.3125rem);
+
+        @media (max-width: 768px) {
+            height: 42px;
+        }
+    }
+
+    p {
+        font-size: clamp(1.2rem, calc(0.8vw + 0.81rem), 1.5rem);
+        font-weight: 700;
+        color: var(--text-main);
+        margin: 0;
+        line-height: 1;
+        /* Loại bỏ khoảng cách mặc định của thẻ p */
+    }
+}

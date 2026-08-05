@@ -1,0 +1,109 @@
+// TestimonialCard.module.scss
+// Placeholder for TestimonialCard molecule scoped styles.
+// Global styles are defined in GlobalStyles.scss (.content-5-box, .content-5-box-top, .content-5-box-bottom, etc.)
+// Add component-specific overrides here as needed.
+
+
+
+.content-5-box {
+    background-color: var(--card-bg);
+    padding: clamp(0.9375rem, calc(2.81vw - 0.22rem), var(--spacing-2xl)) clamp(0.9375rem, calc(1.35vw + 0.38rem), var(--spacing-xl));
+    display: flex;
+    gap: clamp(var(--spacing-sm), 1.05vw, var(--spacing-md));
+    flex-direction: column;
+    color: var(--text-muted);
+    padding-bottom: clamp(2.5rem, calc(0.54vw + 2.36rem), 3rem);
+    border-radius: var(--radius-md);
+    max-height: 539px;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    h2 {
+        font-size: clamp(2.5rem, calc(5.74vw + 1.35rem), 6.25rem);
+        font-weight: 700;
+    }
+
+    .content-5-box-top {
+
+
+        /* Thay đổi con số này cho phù hợp với chiều cao thẻ */
+        overflow-y: auto;
+        /* Tránh text bị dính sát vào thanh cuộn */
+        flex: 1;
+        min-height: 0;
+
+        /* Tuỳ chỉnh thanh cuộn cho đẹp hơn (WebKit browsers: Chrome, Safari, Edge) */
+        &::-webkit-scrollbar {
+            width: 4px;
+            /* Chỉ khoảng 4px để giống iOS/Android */
+        }
+
+        /* 2. Rãnh cuộn (Track) hoàn toàn trong suốt */
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        /* 3. Cục cuộn (Thumb) bán trong suốt */
+        &::-webkit-scrollbar-thumb {
+            /* Dùng mã màu RGBA để tạo độ trong suốt 40% cho tông màu xanh lá */
+            background-color: rgba(21, 204, 163, 0);
+            opacity: 0.5;
+            border-radius: 10px;
+            /* Bo tròn tuyệt đối */
+        }
+
+        /* 4. Tăng độ đậm khi người dùng đưa chuột vào hoặc thao tác */
+        &::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(21, 204, 163, 0.3);
+        }
+
+        p {
+            font-size: clamp(var(--font-base), calc(0.38vw + 0.92rem), var(--font-lg));
+            color: var(--text-muted);
+            text-align: justify;
+            font-weight: 400;
+        }
+    }
+
+    .content-5-box-bottom {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+
+        h4 {
+            font-size: clamp(var(--font-lg), calc(0.38vw + 1.17rem), var(--font-xl));
+        }
+
+        p {
+            font-size: clamp(1rem, calc(0.19vw + 0.96rem), 1.125rem);
+        }
+
+        .content-5-box-bottom-right {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        img {
+            width: 79px;
+            height: 79px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            flex-direction: column;
+            gap: 20px;
+            align-items: start;
+        }
+    }
+
+    @media (max-width: 768px) {
+        border-radius: 0;
+    }
+
+}

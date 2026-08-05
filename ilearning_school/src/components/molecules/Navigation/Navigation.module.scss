@@ -1,0 +1,53 @@
+// Navigation.module.scss
+// Placeholder for Navigation molecule scoped styles.
+// Global styles are defined in GlobalStyles.scss (.header-right, .header-right-icon, etc.)
+// Add component-specific overrides here as needed.
+
+
+.header-right {
+    display: flex;
+    width: 55%;
+    max-width: 1003px;
+    min-width: 400px;
+    color: var(--text-header);
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(var(--font-xs), calc(0.96vw + 0.29rem), var(--font-lg));
+    font-weight: 500;
+
+    .nav-btn {
+        height: clamp(2.5rem, calc(3.34vw + 0.89rem), 3.75rem);
+        width: clamp(4.6875rem, calc(12.54vw - 1.33rem), 9.375rem);
+        min-width: 100px;
+        max-width: 150px;
+        border: 0;
+        border-radius: var(--radius-md);
+        background-color: var(--button-sign);
+        color: var(--text-header);
+        font-weight: 500;
+        font-size: clamp(var(--font-xs), calc(0.96vw + 0.29rem), var(--font-lg));
+    }
+
+    /* Đổi 'img' thành class '.dropdown-icon' */
+    .dropdown-icon {
+        width: 15px;
+        height: auto;
+        padding-left: 5px;
+        box-sizing: border-box;
+    }
+
+    .header-right-icon {
+        height: clamp(0.75rem, calc(2.01vw - 0.21rem), 1.5rem);
+        border-left: solid 1px var(--text-header);
+    }
+
+    li {
+        cursor: pointer;
+    }
+
+   
+
+    @media (max-width: 768px) {
+        display: none !important;
+    }
+}

@@ -1,0 +1,99 @@
+// CurriculumItem.module.scss
+// Placeholder for CurriculumItem molecule scoped styles.
+// Global styles are defined in GlobalStyles.scss (.content-3-box-1, .content-3-box-top, .icon-toggle, etc.)
+// Add component-specific overrides here as needed.
+.content-3-box-1 {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--text-bg);
+    border-radius: var(--radius-lg);
+    padding: clamp(0.9375rem, calc(1.54vw + 0.56rem), 1.875rem);
+    justify-content: center;
+    letter-spacing: 0.02;
+
+    .content-3-box-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--spacing-md);
+
+
+        p {
+            font-size: clamp(var(--font-base), calc(0.76vw + 0.85rem), var(--font-xl));
+            font-weight: 400;
+            line-height: 1.4;
+            letter-spacing: 0.03em;
+        }
+
+
+
+        .content-3-box-top-right {
+            display: flex;
+            gap: 20px;
+
+            button {
+                background-color: transparent;
+                border: 0;
+                padding: 0;
+            }
+
+
+            .content-3-box-top-session {
+                height: 54px;
+                width: auto;
+                display: flex;
+                align-items: center;
+                font-size: var(--font-xl);
+                font-weight: 500;
+                background-color: var(--button-bg);
+                border-radius: var(--radius-md);
+                padding: 10px 20px;
+                box-sizing: border-box;
+                white-space: nowrap;
+                margin-right: clamp(0.9375rem, calc(1.54vw + 0.56rem), 1.875rem);
+
+
+                @media (max-width: 768px) {
+                    display: none;
+                }
+            }
+
+        }
+
+
+        @media (max-width: 768px) {
+            align-items: flex-start;
+        }
+    }
+
+    .content-3-box-bottom {
+        font-size: clamp(0.875rem, calc(0.77vw + 0.72rem), 1.375rem);
+        padding-top: var(--spacing-sm);
+        line-height: 1.8;
+
+        ul {
+            display: flex;
+            flex-direction: column;
+
+            li::before {
+                content: "-";
+                /* Bạn có thể đổi thành dấu tích, mũi tên (➔), hoặc dấu gạch ngang (-) */
+                color: var(--text-main);
+                /* Màu sắc cho dấu */
+                margin-right: 8px;
+                /* Khoảng cách giữa dấu và chữ */
+            }
+
+
+            li {
+
+                letter-spacing: 0.02em;
+                font-weight: 300 !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            padding-top: 10px;
+        }
+    }
+}

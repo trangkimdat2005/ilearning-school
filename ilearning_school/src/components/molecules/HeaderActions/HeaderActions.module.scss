@@ -1,0 +1,23 @@
+// HeaderActions.module.scss
+// Placeholder for HeaderActions molecule scoped styles.
+// Global styles are defined in GlobalStyles.scss (.header-hide, .header-button-suport, etc.)
+// Add component-specific overrides here as needed.
+.header-hide {
+    display: none;
+    gap: 10px;
+
+    .header-button-suport {
+        height: 35px;
+        width: 124px;
+        border-radius: 6px;
+        border: 0;
+        background-color: rgba(21, 204, 163, 0.2);
+        color: var(--text-main);
+        font-size: var(--font-base);
+        font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+        display: flex;
+    }
+}
