@@ -1,5 +1,5 @@
 // src/features/syllabus/syllabusSaga.js
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import syllabusApi from '../../api/modules/syllabusApi';
 import {
   fetchSyllabusListRequest,
@@ -8,15 +8,26 @@ import {
 } from './syllabusSlice';
 
 function* handleFetchSyllabusList(action) {
+  const { typeKey, ...params } = action.payload;
+  
   try {
-    const response = yield call(syllabusApi.getPublicList, action.payload);
-    console.log('API syllabus response:', response );
-    yield put(fetchSyllabusListSuccess(response));
+    const response = yield call(syllabusApi.getPublicList, params);
+    
+    yield put(fetchSyllabusListSuccess({
+      typeKey: typeKey,
+      data: response.data, 
+      urlBase: response.urlBase,
+      firebaseUrl: response.firebaseUrl // Gửi thêm nếu component của bạn cần dùng
+    }));
+    
   } catch (error) {
-    yield put(fetchSyllabusListFailure(error.message || 'Có lỗi xảy ra'));
+    yield put(fetchSyllabusListFailure({
+      typeKey: typeKey,
+      error: error.message || 'Có lỗi xảy ra'
+    }));
   }
 }
 
 export default function* syllabusSaga() {
-  yield takeLatest(fetchSyllabusListRequest.type, handleFetchSyllabusList);
+  yield takeEvery(fetchSyllabusListRequest.type, handleFetchSyllabusList);
 }

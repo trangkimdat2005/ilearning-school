@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import plusIcon from '../../../assets/images/cong.png';
 import minusIcon from '../../../assets/images/tru.png';
 import styles from './CurriculumItem.module.scss';
-import { fetchSyllabusListRequest } from '../../../features/syllabus/syllabusSlice';
+import { fetchSyllabusListRequest, selectSyllabusByType } from '../../../features/syllabus/syllabusSlice';
 
 const cx = classNames.bind(styles);
 
@@ -45,23 +45,29 @@ const ChapterItem = ({ chapter }) => {
 };
 
 // Component chính
-export default function CurriculumItem({courseId}) {
+export default function CurriculumItem({ courseId }) {
   const dispatch = useDispatch();
-  const { list: syllabusList, loading, error } = useSelector((state) => state.syllabus);
+  const { list: syllabusList, loading, error } = useSelector((state) =>
+    selectSyllabusByType(state, courseId)
+  );
 
   useEffect(() => {
-    // Đã sửa lại thành gọi API của Syllabus thay vì Mentor
+    if (!courseId) return;
     dispatch(
       fetchSyllabusListRequest({
-        criteria: {courseId: courseId }, // Tuỳ chỉnh trạng thái nếu cần
-        pageable: { 
-          page: 0, 
-          size: 100, // Nên để size lớn để lấy đủ bài học trong khóa
-          sort: ["ordering,asc"] // RẤT QUAN TRỌNG: Phải sort tăng dần theo ordering để kind 1 nằm trên kind 2
+        typeKey: courseId,
+        criteria: { courseId: courseId },
+        pageable: {
+          page: 0,
+          size: 100,
+          sort: ["ordering,asc"]
         },
       })
     );
   }, [dispatch]);
+
+  console.log('courseId: ', courseId)
+  console.log('syllabusList: ', syllabusList)
 
   if (loading) return <p>Đang tải...</p>;
   if (error) return <p>Lỗi: {error}</p>;
@@ -73,11 +79,9 @@ export default function CurriculumItem({courseId}) {
 
   syllabusList.forEach((item) => {
     if (item.kind === 1) {
-      // Nếu là kind 1 -> Tạo một đối tượng Chương mới, thêm mảng lessons rỗng
       currentChapter = { ...item, lessons: [] };
       groupedSyllabus.push(currentChapter);
     } else if (item.kind === 2) {
-      // Nếu là kind 2 -> Đẩy vào mảng lessons của Chương gần nhất phía trên nó
       if (currentChapter) {
         currentChapter.lessons.push(item);
       }
