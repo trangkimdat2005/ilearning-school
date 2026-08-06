@@ -124,7 +124,7 @@ export default function PartnerCarousel() {
           {duplicatedLogos.map((logo, index) => (
             <div key={index} className={cx('carousel-item-logo')}>
               <img src={logo.src} alt={logo.alt || `partner-${index}`} />
-              <div class={cx('image-caption')}>{logo.alt}</div>
+              <div className={cx('image-caption')}>{logo.alt}</div>
             </div>
           ))}
         </div>

@@ -17,7 +17,7 @@ export default function BannerSlide({ isActive, bgUrl, title, description, butto
             className={cx('bg-image')}
           />
 
-          <div className={cx('overlay')} on></div>
+          <div className={cx('overlay')}></div>
 
           <div className={cx('content-img-center')}>
             <div className={cx('content-img-center-text')}>
