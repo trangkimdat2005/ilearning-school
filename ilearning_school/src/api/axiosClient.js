@@ -37,7 +37,6 @@ axiosClient.interceptors.response.use(
   (response) => {
     const { result, code, data, message, firebaseUrl, urlBase } = response.data || {};
 
-    // result = false: lỗi nghiệp vụ dù HTTP status vẫn 200
     if (result === false) {
       return Promise.reject({ code, message: message || 'Có lỗi xảy ra' });
     }
