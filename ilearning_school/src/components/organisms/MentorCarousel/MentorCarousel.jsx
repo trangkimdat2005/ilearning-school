@@ -3,6 +3,10 @@ import { useEffect, useRef } from 'react';
 import { mentorsDataList } from '../../../data/mentorsData';
 import { fetchMentorListRequest } from '../../../features/mentor/mentorSlice';
 import { getFileUrl } from '../../../utils/fileUrl'
+import classNames from 'classnames/bind';
+import styles from './MentorCarousel.module.scss';
+
+const cx = classNames.bind(styles);
 
 export default function MentorCarousel() {
 
@@ -13,8 +17,8 @@ export default function MentorCarousel() {
     useEffect(() => {
         dispatch(
             fetchMentorListRequest({
-                criteria: { name: '', status: 1 },
-                pageable: { page: 0, size: 10, sort: 'id,desc' },
+                criteria: {},
+                pageable: {},
             })
         );
     }, [dispatch]);
@@ -34,10 +38,10 @@ export default function MentorCarousel() {
     if (!mentorList.length) return null;
 
     return (
-        <div className="content-6">
-            <div id={carouselId} className="carousel slide" data-bs-ride="carousel">
+        <div className={cx('content-6')}>
+            <div id={carouselId} className={cx('carousel', 'slide')} data-bs-ride="carousel">
 
-                <div className="carousel-indicators content-6-btn-indicators">
+                <div className={cx('carousel-indicators', 'content-6-btn-indicators')}>
                     {mentorList.map((_, index) => (
                         <button
                             key={`indicator-${index}`}
@@ -49,21 +53,21 @@ export default function MentorCarousel() {
                     ))}
                 </div>
 
-                <div className="carousel-inner">
+                <div className={cx('carousel-inner')}>
                     {mentorList.map((mentor, index) => (
-                        <div key={mentor.id} className={`carousel-item ${index === 0 ? "active" : ""}`}>
-                            <div className="content-6-slide">
-                                <div className="content-6-left">
+                        <div key={mentor.id} className={cx('carousel-item', { active: index === 0 })}>
+                            <div className={cx('content-6-slide')}>
+                                <div className={cx('content-6-left')}>
                                     <img src={getFileUrl(mentor.account.avatarPath)} alt="Profile Photo" />
                                 </div>
 
-                                <div className="content-6-right">
-                                    <div className="content-6-right-slide-top">
+                                <div className={cx('content-6-right')}>
+                                    <div className={cx('content-6-right-slide-top')}>
                                         <h3>"</h3>
                                         <p>{mentor.description}</p>
                                     </div>
 
-                                    <div className="content-6-right-slide-bottom">
+                                    <div className={cx('content-6-right-slide-bottom')}>
                                         <h4>{mentor.account?.fullName}</h4>
                                         <p>{mentor.position || mentor.account?.fullName}</p>
                                     </div>
@@ -74,7 +78,7 @@ export default function MentorCarousel() {
                 </div>
 
                 <button
-                    className="carousel-control-prev content-6-button-prev"
+                    className={cx('carousel-control-prev', 'content-6-button-prev')}
                     type="button"
                     data-bs-target={`#${carouselId}`}
                     data-bs-slide="prev"
@@ -82,7 +86,7 @@ export default function MentorCarousel() {
                     <span>&#10094;</span>
                 </button>
                 <button
-                    className="carousel-control-next content-6-button-next"
+                    className={cx('carousel-control-next', 'content-6-button-next')}
                     type="button"
                     data-bs-target={`#${carouselId}`}
                     data-bs-slide="next"

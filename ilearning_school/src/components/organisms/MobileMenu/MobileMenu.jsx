@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
 import menuIcon from '../../../assets/images/Group 427321692.png';
+import classNames from 'classnames/bind';
+import styles from './MobileMenu.module.scss';
+
+const cx = classNames.bind(styles);
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,23 +39,23 @@ export default function MobileMenu() {
 
   return (
     <>
-      <a href="#mobile-menu" className="header-button" onClick={openMenu}>
+      <a href="#mobile-menu" className={cx('header-button')} onClick={openMenu}>
         <img src={menuIcon} alt="Menu" />
       </a>
 
       <div
-        className={`menu-overlay ${isOpen ? 'active' : ''}`}
+        className={cx('menu-overlay', { active: isOpen })}
         onClick={closeMenu}
       ></div>
 
-      <nav className={`mobile-menu ${isOpen ? 'active' : ''}`}>
-        <div className="menu-header">
-          <span className="menu-title">Menu</span>
-          <button className="close-menu-btn" onClick={closeMenu}>
+      <nav className={cx('mobile-menu', { active: isOpen })}>
+        <div className={cx('menu-header')}>
+          <span className={cx('menu-title')}>Menu</span>
+          <button className={cx('close-menu-btn')} onClick={closeMenu}>
             ✕
           </button>
         </div>
-        <ul className="menu-list">
+        <ul className={cx('menu-list')}>
           <li><a onClick={closeMenu}>Trang chủ</a></li>
           <li onClick={() => scrollToSection('section-courses')}><a onClick={closeMenu}>Khoá học</a></li>
           <li onClick={() => scrollToSection('section-testimonials')}><a onClick={closeMenu}>Góc học viên</a></li>

@@ -2,3 +2,144 @@
 // Placeholder for TestimonialSection organism scoped styles.
 // Global styles are defined in GlobalStyles.scss (.content-5, etc.)
 // Add component-specific overrides here as needed.
+
+.content-5 {
+    display: flex;
+    max-width: 1440px;
+    width: 100%;
+    gap: clamp(var(--spacing-md), 4.01vw, var(--spacing-xl-mid));
+
+    .content-5-btn-indicators [data-bs-target] {
+        display: none;
+
+        @media (max-width: 768px) {
+            display: block;
+            width: clamp(0.5rem, calc(0.27vw + 0.43rem), 0.75rem);
+            height: clamp(0.5rem, calc(0.27vw + 0.43rem), 0.75rem);
+            border-radius: 50%;
+            border: none;
+            background-color: var(--text-muted);
+            margin: 0 6px;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            position: relative;
+
+            bottom: clamp(0.9375rem, calc(0.67vw + 0.65rem), 1.5625rem);
+        }
+    }
+
+
+
+    .content-5-inner {
+        border-radius: var(--radius-md);
+        overflow: hidden;
+
+        .content-5-inner-item {
+            height: clamp(28.46rem, calc(5.62vw + 27.01rem), 33.6875rem);
+        }
+    }
+
+    .content-5-button-prev {
+        border: var(--text-muted) 1px solid;
+        border-radius: clamp(0.61rem, 1.17vw, 1rem);
+        left: clamp(1.25rem, calc(0.67vw + 1.08rem), 1.875rem);
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        height: clamp(1.84375rem, 3.52vw, 3rem);
+        width: clamp(1.84375rem, 3.52vw, 3rem);
+        background-color: transparent;
+        opacity: 1;
+        font-size: clamp(14px, 1.67vw, 22.8px);
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        line-height: 0.8;
+
+        &:focus,
+        &:hover {
+            color: inherit !important;
+            opacity: 1 !important;
+            text-decoration: none !important;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        &:active {
+
+            border: solid rgba(255, 255, 255, 1);
+            background-color: var(--primary-color);
+            opacity: 1;
+        }
+
+        &.disabled,
+        &:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+    }
+
+    .content-5-button-next {
+        border: var(--text-muted) 1px solid;
+        border-radius: clamp(0.61rem, 1.17vw, 1rem);
+        right: clamp(1.25rem, calc(0.67vw + 1.08rem), 1.875rem);
+        left: auto;
+        bottom: auto;
+        transform: translateY(-50%);
+        top: 50%;
+        height: clamp(1.84375rem, 3.52vw, 3rem);
+        width: clamp(1.84375rem, 3.52vw, 3rem);
+        background-color: transparent;
+        opacity: 1;
+        font-size: clamp(14px, 1.67vw, 22.8px);
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        line-height: 0.8;
+
+        &:focus,
+        &:hover {
+            color: inherit !important;
+            opacity: 1 !important;
+            text-decoration: none !important;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        &:active {
+
+            border: solid rgba(255, 255, 255, 1);
+            background-color: var(--primary-color);
+            opacity: 1;
+        }
+
+        &.disabled,
+        &:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    }
+
+
+
+    @media (max-width: 768px) {
+        .content-5-btn-indicators {
+            margin-bottom: 0;
+
+            .active {
+                opacity: 1;
+                background-color: var(--button-bg);
+                /* Màu nổi bật khi được chọn (ví dụ: Xanh lá) */
+            }
+        }
+    }
+}

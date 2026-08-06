@@ -1,9 +1,12 @@
 import { useEffect, useRef } from 'react';
+import classNames from 'classnames/bind';
 import { partnersSlideList } from '../../../data/partnersData';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCompanyListRequest } from '../../../features/company/companySlice';
-import './PartnerCarousel.module.scss';
+import styles from './PartnerCarousel.module.scss';
 import { getFileUrl } from '../../../utils/fileUrl'
+
+const cx = classNames.bind(styles);
 
 export default function PartnerCarousel() {
   const dispatch = useDispatch();
@@ -33,8 +36,8 @@ export default function PartnerCarousel() {
   useEffect(() => {
     dispatch(
       fetchCompanyListRequest({
-        criteria: { name: '', status: 1 },
-        pageable: { page: 0, size: 10, sort: 'id,desc' },
+        criteria: {},
+        pageable: {},
       })
     );
   }, [dispatch]);
@@ -84,8 +87,8 @@ export default function PartnerCarousel() {
     }, 600);
   };
 
-  const handlePrev = () => scrollWithButton(-250);
-  const handleNext = () => scrollWithButton(250);
+  // const handlePrev = () => scrollWithButton(-250);
+  // const handleNext = () => scrollWithButton(250);
 
   if (loading) return (
     <>
@@ -104,29 +107,30 @@ export default function PartnerCarousel() {
 
   return (
     <div
-      className="content-7 relative-container"
+      className={cx('content-7')}
       // Xử lý cho Chuột (Máy tính)
       onMouseEnter={() => { isAutoScrolling.current = false; }}
       onMouseLeave={() => { isAutoScrolling.current = true; }}
       // Xử lý cho Cảm ứng (Điện thoại/Tablet)
-      onTouchStart={() => { isAutoScrolling.current = false; }} // Dừng khi ngón tay chạm vào
-      onTouchEnd={() => { isAutoScrolling.current = true; }}    // Chạy tiếp khi nhấc ngón tay ra
+      onTouchStart={() => { isAutoScrolling.current = false; }}
+      onTouchEnd={() => { isAutoScrolling.current = true; }}
     >
       <div
-        className="carousel-infinite-wrapper"
+        className={cx('carousel-infinite-wrapper')}
         ref={carouselRef}
         onScroll={handleScroll}
       >
-        <div className="carousel-infinite-track">
+        <div className={cx('carousel-infinite-track')}>
           {duplicatedLogos.map((logo, index) => (
-            <div key={index} className="carousel-item-logo">
+            <div key={index} className={cx('carousel-item-logo')}>
               <img src={logo.src} alt={logo.alt || `partner-${index}`} />
+              <div class={cx('image-caption')}>{logo.alt}</div>
             </div>
           ))}
         </div>
       </div>
 
-      <button
+      {/* <button
         className="carousel-control-prev content-7-button-prev custom-nav-btn"
         type="button"
         onClick={handlePrev}
@@ -140,7 +144,7 @@ export default function PartnerCarousel() {
         onClick={handleNext}
       >
         <span>→</span>
-      </button>
+      </button> */}
     </div>
   );
 }

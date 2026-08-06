@@ -10,6 +10,7 @@ import {
 function* handleFetchCompanyList(action) {
   try {
     const response  = yield call(companyApi.getPublicList, action.payload);
+    console.log('response company', response);
     yield put(fetchCompanyListSuccess(response));
   } catch (error) {
     yield put(fetchCompanyListFailure(error.message || 'Có lỗi xảy ra'));

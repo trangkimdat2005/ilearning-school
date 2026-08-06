@@ -1,6 +1,12 @@
+
+import classNames from 'classnames/bind';
+import styles from './IntroContent.module.scss';
+
+const cx = classNames.bind(styles);
+
 export default function IntroContent() {
   return (
-    <div className="content-2">
+    <div className={cx('content-2')}>
       <h4>
         Bạn đã tự tin để trở thành Senior Software Engineer?
       </h4>

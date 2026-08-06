@@ -2,3 +2,100 @@
 // Placeholder for CourseDetailCard organism scoped styles.
 // Global styles are defined in GlobalStyles.scss (.content-3, .content-3-top, .content-3-bottom, etc.)
 // Add component-specific overrides here as needed.
+
+
+.content-3 {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(var(--spacing-lg), 2.68vw, var(--spacing-xl));
+    width: 100%;
+
+
+    .content-3-top {
+        background-color: var(--card-bg);
+        padding: clamp(0.94rem, 0.48rem + 1.79vw, 2rem);
+        padding-left: clamp(2.64rem, calc(5.03vw + 1.35rem), 5.625rem);
+        display: flex;
+        gap: clamp(0rem, calc(7.39vw - 1.9rem), 6.875rem);
+        border-radius: var(--radius-lg);
+        align-items: stretch;
+        width: 100%;
+
+        .content-3-left {
+            margin: clamp(1rem, calc(1.28vw + 0.67rem), 2.1875rem) 0;
+            width: 49%;
+            flex-shrink: 0;
+            max-width: 557px;
+
+            .content-3-top-img {
+
+                width: 100%;
+                object-fit: cover;
+                object-position: center;
+                border-radius: var(--radius-lg);
+                aspect-ratio: 557 / 393;
+                object-fit: cover;
+                object-position: center;
+                display: block;
+
+                @media (max-width: 768px) {
+                    padding: 0 0 15px 0;
+                    margin: 0 !important;
+                }
+            }
+
+            @media (max-width: 768px) {
+                width: 100%;
+                max-width: none;
+                margin: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            padding: clamp(0.94rem, 0.48rem + 1.79vw, 2rem);
+            max-height: clamp(39.625rem, 153.88vw, 73.86rem);
+        }
+    }
+
+    .content-3-bottom {
+        background-color: var(--card-bg);
+        padding: clamp(1.25rem, calc(3.07vw + 0.5rem), 3.125rem) clamp(0.9375rem, calc(3.59vw + 0.06rem), 3.125rem);
+        display: flex;
+        gap: clamp(1.5625rem, calc(2.56vw + 0.94rem), 3.125rem);
+        flex-direction: column;
+        border-radius: var(--radius-lg);
+
+        h4 {
+            font-size: clamp(var(--font-lg), calc(1.46vw + 0.94rem), var(--font-2xl-mid));
+        }
+
+        .content-3-box {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(1.1875rem, calc(0.41vw + 1.09rem), 1.25rem);
+            border-radius: var(--radius-lg);
+        }
+
+        .content-3-bottom-button {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+            button {
+                font-size: clamp(var(--font-base), calc(0.71vw + 0.66rem), var(--font-xl));
+                font-weight: 600;
+                width: clamp(9.375rem, calc(8.2vw + 7.38rem), 14.375rem);
+                height: clamp(3.125rem, calc(3.07vw + 2.38rem), 5rem);
+                background-color: var(--primary-color);
+                color: var(--text-main);
+                border-radius: var(--radius-lg);
+                border: 0;
+            }
+
+            @media (max-width: 768px) {
+                display: none;
+            }
+        }
+    }
+}

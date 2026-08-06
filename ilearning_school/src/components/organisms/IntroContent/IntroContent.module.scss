@@ -2,3 +2,46 @@
 // Placeholder for IntroContent organism scoped styles.
 // Global styles are defined in GlobalStyles.scss (.content-2, etc.)
 // Add component-specific overrides here as needed.
+
+.content-2 {
+    width: 100%;
+    max-width: 876px;
+    padding: clamp(1.88rem, 0.27rem + 3.34vw, 3.13rem) clamp(var(--spacing-2xl-mid), 6.95vw, var(--spacing-6xl));
+
+    /* 3. Màu sắc và giao diện */
+    background-color: var(--primary-color);
+
+    /* 4. Xử lý ngắt dòng thông minh (Chữ tự xuống hàng đúng chuẩn) */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+    /* 5. Quan trọng: Tránh lỗi phồng kích thước */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    font-size: var(--font-lg);
+    border-radius: var(--radius-md);
+    line-height: 1.5;
+
+    h4 {
+        font-weight: 700;
+        width: 80%;
+        font-size: var(--font-xl);
+        line-height: 1.5;
+    }
+
+    p {
+        font-size: var(--font-lg);
+        line-height: 1.5;
+        font-weight: 400;
+    }
+
+    @media (max-width: 768px) {
+        padding: 30px 15px;
+        width: 100%;
+    }
+}

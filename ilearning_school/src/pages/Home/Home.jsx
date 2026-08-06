@@ -7,10 +7,14 @@ import Button from "../../components/atoms/Button/Button";
 import TestimonialSection from "../../components/organisms/TestimonialSection/TestimonialSection";
 import MentorCarousel from "../../components/organisms/MentorCarousel/MentorCarousel";
 import PartnerCarousel from "../../components/organisms/PartnerCarousel/PartnerCarousel";
+import classNames from 'classnames/bind';
+import styles from './Home.module.scss';
+
+const cx = classNames.bind(styles);
 
 export default function Home() {
     return (
-        <div className="home-container">
+        <div className={cx('home-container')}>
             {/* Gắn Banner Carousel lên đầu trang chủ */}
             <BannerCarousel />
 

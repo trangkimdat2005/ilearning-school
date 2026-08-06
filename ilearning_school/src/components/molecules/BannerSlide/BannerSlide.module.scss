@@ -39,7 +39,7 @@
         z-index: 30;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         max-width: 1037px;
-        min-height: 429px;
+        height: 429px;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -48,17 +48,14 @@
         justify-content: space-between;
         gap: 30px;
 
-        .content-img-center-text {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            flex-shrink: 0;
+        
 
             h1 {
                 font-size: clamp(var(--font-xl), calc(2.87vw + 0.93rem), 3.375rem);
                 font-weight: 600;
                 color: var(--text-main);
                 margin: 0;
+                flex-shrink: 0;
             }
 
             p {
@@ -68,33 +65,35 @@
                 opacity: 0.8;
                 margin: 0;
                 display: -webkit-box;
-                -webkit-line-clamp: 3;
+                -webkit-line-clamp: 5;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                height: 100%;
 
                 @media (min-width: 768px) and (max-width: 1023px) {
-                    -webkit-line-clamp: 5;
+                    -webkit-line-clamp: 7;
                 }
 
             }
-        }
+
+        
 
 
 
-        button {
-            width: clamp(4.1rem, 16.84vw, 14.38rem);
-            height: clamp(1.43rem, 5.86vw, 5rem);
-            background-color: var(--button-bg);
-            color: var(--text-main);
-            border-radius: var(--radius-lg);
-            border: 0;
-            font-size: clamp(0.43rem, 1.76vw, 1.5rem);
-            font-weight: 800;
-            cursor: pointer;
-            position: relative;
-            z-index: 31;
-        }
+        // button {
+        //     width: clamp(4.1rem, 16.84vw, 14.38rem);
+        //     height: clamp(1.43rem, 5.86vw, 5rem);
+        //     background-color: var(--button-bg);
+        //     color: var(--text-main);
+        //     border-radius: var(--radius-lg);
+        //     border: 0;
+        //     font-size: clamp(0.43rem, 1.76vw, 1.5rem);
+        //     font-weight: 800;
+        //     cursor: pointer;
+        //     position: relative;
+        //     z-index: 31;
+        // }
 
 
     }

@@ -9,7 +9,7 @@ const mentorApi = {
    * @param {Object} params.pageable - { page, size, sort }
    */
   getPublicList: ({ criteria = {}, pageable = {} }) => {
-    const { page = 0, size = 10, sort = [] } = pageable;
+    const { page = 0, size = 100, sort = [] } = pageable;
 
     return axiosClient.get(ENDPOINTS.MENTOR.PUBLIC_LIST, {
       params: {
