@@ -55,7 +55,7 @@ export default function MentorCarousel() {
 
                 <div className={cx('carousel-inner')}>
                     {mentorList.map((mentor, index) => (
-                        <div key={mentor.id} className={cx('carousel-item', { active: index === 0 })}>
+                        <div key={mentor.id} className={`${cx('carousel-item')} ${index === 0 ? "active" : ""}`}>
                             <div className={cx('content-6-slide')}>
                                 <div className={cx('content-6-left')}>
                                     <img src={getFileUrl(mentor.account.avatarPath)} alt="Profile Photo" />

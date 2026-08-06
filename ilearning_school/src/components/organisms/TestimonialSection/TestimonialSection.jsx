@@ -11,7 +11,7 @@ export default function TestimonialSection() {
   const dispatch = useDispatch();
   const { list: ratingList, loading, error } = useSelector((state) => state.rating);
   const [isMobile, setIsMobile] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0); 
   const carouselId = "testimonial-slide";
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function TestimonialSection() {
   // Lắng nghe sự kiện chuyển slide của Bootstrap để cập nhật activeIndex
   useEffect(() => {
     const carouselElement = document.getElementById(carouselId);
-
+    
     const handleSlide = (event) => {
       setActiveIndex(event.to);
     };
@@ -100,14 +100,10 @@ export default function TestimonialSection() {
 
         <div className={cx('carousel-inner', 'content-5-inner')}>
           {groupedTestimonials.map((rating, index) => (
-            <div key={index} className={cx('carousel-item', { active: index === 0 })}>
+            <div key={index} className={`${cx('carousel-item')}  ${index === 0 ? "active" : ""}`}>
               <div className={cx('row', 'content-5-slide')}>
                 {rating.map((item, itemIndex) => (
-                  <div key={`${item.id}-${itemIndex}`} className={cx('content-5-inner-item', {
-                    'col-12': isMobile,
-                    'col-md-4': !isMobile
-                  })}
-                  >
+                  <div key={`${item.id}-${itemIndex}`} className={`${isMobile ? "col-12" : "col-md-4"} ${cx('content-5-inner-item')}`}>
                     <TestimonialCard testimonial={item} />
                   </div>
                 ))}
