@@ -9,7 +9,7 @@
     background-color: var(--card-bg);
     width: 100%;
     border-radius: var(--radius-md);
-    padding: 0 clamp(3.125rem, calc(8.13vw + 1.03rem), 10.69rem);
+    padding: 0 clamp(2rem, calc(4.8vw + 0.6rem), 6.25rem);
     height: clamp(7.125rem, calc(9.48vw + 4.685rem), 15.9375rem);
     display: flex;
     align-items: center;
@@ -58,11 +58,10 @@
                     transform: translate(-50%, -50%);
                     top: 50%;
                     left: 50%;
-                    width: 80%;
                     padding: 20px;
                     background: rgba(21, 204, 163, 0.5);
                     font-weight: 500;
-                    font-size: 24px;
+                    font-size: clamp(1.125rem, calc(0.87vw + 0.95rem), 1.5rem);
                     opacity: 0;
                     visibility: hidden;
                     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -70,6 +69,8 @@
                     align-items: center;
                     justify-content: center;
                     border-radius: var(--radius-md);
+                    display: flex;
+                    flex-wrap: nowrap;
                 }
 
                 &:hover {

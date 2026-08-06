@@ -144,7 +144,7 @@ export default function BannerCarousel() {
                 bgUrl={slide.image}
                 title={slide.title}
                 description={slide.description}
-                link = {slide?.target}
+                link = {slide?.url}
               />
             );
           })}
