@@ -2,3 +2,40 @@
 // Placeholder for BannerCarousel organism scoped styles.
 // Global styles are defined in GlobalStyles.scss (.content-img, #progressTrack, #progressFill, etc.)
 // Add component-specific overrides here as needed.
+
+.content-img {
+    position: relative;
+    width: 100%;
+    max-width: 1868px;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    max-height: 724px;
+
+    .content-img-progressTrack {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 109px;
+        height: 13px;
+        background: var(--text-main);
+        opacity: 0.8;
+        border-radius: 50px;
+        cursor: pointer;
+        z-index: 20;
+
+        .content-img-progressFill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--button-bg);
+            border-radius: 50px;
+            transition: left 0.6s ease;
+        }
+    }
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+}

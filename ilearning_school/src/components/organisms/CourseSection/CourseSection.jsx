@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchClassroomListRequest } from '../../../features/classroom/classroomSlice';
 import Button from "../../atoms/Button";
 import './CourseSection.module.scss';
+import classNames from 'classnames/bind';
+import styles from './CourseSection.module.scss';
+
+const cx = classNames.bind(styles);
 
 export default function CourseSection() {
   const dispatch = useDispatch();
@@ -19,23 +23,16 @@ export default function CourseSection() {
       setIsMobile(window.innerWidth < 768);
     };
 
-    // Gọi lần đầu khi component vừa render
     handleResize(); 
-
-    // Đăng ký lắng nghe sự kiện thay đổi kích thước
     window.addEventListener('resize', handleResize);
-    
-    // Dọn dẹp sự kiện khi component bị huỷ (unmount)
     return () => window.removeEventListener('resize', handleResize);
-  }, []); // Cặp ngoặc vuông rỗng [] nghĩa là chỉ đăng ký listener 1 lần duy nhất
+  }, []); 
 
   // 3. TỰ ĐỘNG CẬP NHẬT số lượng hiển thị mỗi khi isMobile thay đổi
   useEffect(() => {
-    // Nếu màn hình co/giãn qua mốc 768px, tự động reset về 3 (mobile) hoặc 5 (PC)
     setVisibleCount(isMobile ? 3 : 5);
   }, [isMobile]); // Lắng nghe sự thay đổi của state isMobile
 
-  // Bước nhảy để load thêm
   const step = isMobile ? 3 : 5;
   const limitedClassrooms = (classroomList || []).slice(0, visibleCount);
 
@@ -64,7 +61,7 @@ export default function CourseSection() {
   if (!classroomList || classroomList.length === 0) return null;
 
   return (
-    <div className="courses-list-section">
+    <div className={cx('courses-list-section')}>
       {limitedClassrooms.map((classroom) => (
         <CourseDetailCard
           key={classroom.id}
@@ -73,8 +70,8 @@ export default function CourseSection() {
       ))}
       
       {visibleCount < classroomList.length && (
-        <Button className="content-button-all-lean" onClick={handleLoadMore}>
-          Tất cả khoá học
+        <Button className={cx('content-button-all-lean')} onClick={handleLoadMore}>
+          Xem thêm khóa học
         </Button>
       )}
     </div>

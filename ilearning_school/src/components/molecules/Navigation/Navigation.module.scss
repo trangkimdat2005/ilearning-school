@@ -14,6 +14,8 @@
     align-items: center;
     font-size: clamp(var(--font-xs), calc(0.96vw + 0.29rem), var(--font-lg));
     font-weight: 500;
+    display: flex;
+        justify-content: space-between;
 
     .nav-btn {
         height: clamp(2.5rem, calc(3.34vw + 0.89rem), 3.75rem);
@@ -40,12 +42,11 @@
         height: clamp(0.75rem, calc(2.01vw - 0.21rem), 1.5rem);
         border-left: solid 1px var(--text-header);
     }
-
     li {
         cursor: pointer;
     }
 
-   
+
 
     @media (max-width: 768px) {
         display: none !important;

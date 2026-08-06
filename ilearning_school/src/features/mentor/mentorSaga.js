@@ -10,6 +10,7 @@ import {
 function* handleFetchMentorList(action) {
   try {
     const response  = yield call(mentorApi.getPublicList, action.payload);
+    console.log('response mentor', response);
     yield put(fetchMentorListSuccess(response));
   } catch (error) {
     yield put(fetchMentorListFailure(error.message || 'Có lỗi xảy ra'));

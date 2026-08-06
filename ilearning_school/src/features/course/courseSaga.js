@@ -10,6 +10,7 @@ import {
 function* handleFetchCourseList(action) {
   try {
     const response  = yield call(courseApi.getList, action.payload);
+    console.log('response course', response);
     yield put(fetchCourseListSuccess(response));
   } catch (error) {
     yield put(fetchCourseListFailure(error.message || 'Có lỗi xảy ra'));

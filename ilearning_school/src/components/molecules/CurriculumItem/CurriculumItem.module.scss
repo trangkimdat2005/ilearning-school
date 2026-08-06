@@ -96,4 +96,15 @@
             padding-top: 10px;
         }
     }
+
+    .toggle-box.hidden {
+        display: none !important;
+    }
+
+    .icon-toggle {
+        width: clamp(1.1875rem, calc(2.15vw + 0.66rem), 2.5rem);
+        height: auto;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
 }

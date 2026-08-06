@@ -1,0 +1,40 @@
+.header {
+    background-color: var(--header-bg);
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 1000;
+
+    .header-around {
+        background-color: transparent;
+        padding: clamp(0.375rem, 0.67vw, 0.625rem) clamp(0px, -0.82rem + 3.15vw, 1.875rem);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1920px;
+        width: 100%;
+        box-sizing: border-box;
+        gap: 25px;
+        line-height: 1;
+        height: 100%;
+
+        .header-left-center {
+            display: flex;
+            width: 38%;
+            gap: 10%;
+            object-fit: cover;
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 5px 10px;
+        background-color: var(--bg-dark);
+        height: 75px;
+    }
+
+
+}

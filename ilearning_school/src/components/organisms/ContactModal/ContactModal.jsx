@@ -1,5 +1,9 @@
 import { useEffect } from 'react';
+import classNames from 'classnames/bind';
 import ContactForm from '../../molecules/ContactForm';
+import styles from './ContactModal.module.scss';
+
+const cx = classNames.bind(styles);
 
 export default function ContactModal({ isOpen, onClose }) {
 
@@ -19,29 +23,27 @@ export default function ContactModal({ isOpen, onClose }) {
 
   return (
     <div id="contact-module">
-      <div className="modal-overlay active" id="myModal" onClick={onClose}>
-        
-        <div className="modal-position" onClick={(e) => e.stopPropagation()}>
-          
-          <button 
-            className="close-btn" 
-            id="closeBtn" 
-            aria-label="Close" 
+      <div className={cx('modal-overlay', 'active')} id="myModal" onClick={onClose}>
+
+        <div className={cx('modal-position')} onClick={(e) => e.stopPropagation()}>
+
+          <button
+            className={cx('close-btn')}
+            id="closeBtn"
+            aria-label="Close"
             onClick={onClose}
           >
             &#10005;
           </button>
-          
-          <div className="contact-modal" id="modalBox">
-            <div className="modal-form">
-              
-              <div className="form-header">
-                <h2 className="modal-title">Thông tin liên hệ</h2>
+
+          <div className={cx('contact-modal')} id="modalBox">
+            <div className={cx('modal-form')}>
+
+              <div className={cx('form-header')}>
+                <h2 className={cx('modal-title')}>Thông tin liên hệ</h2>
               </div>
 
-              <div className="form-body">
-                <ContactForm />
-              </div>
+              <ContactForm />
 
             </div>
           </div>

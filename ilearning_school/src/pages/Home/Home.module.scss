@@ -1,0 +1,20 @@
+.home-container {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100% !important;
+    padding: var(--spacing-lg);
+    padding-top: 130px;
+    /* Thêm khoảng cách để tránh header che khuất nội dung */
+    justify-content: space-between;
+    gap: clamp(var(--spacing-xl-mid), 5.56vw, var(--spacing-4xl));
+    border-radius: 0;
+
+    @media (max-width: 768px) {
+        padding: 15px 10px;
+        margin-top: 75px;
+        gap: 30px;
+    }
+}

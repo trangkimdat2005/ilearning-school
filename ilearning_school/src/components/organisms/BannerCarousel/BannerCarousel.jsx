@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
+import classNames from 'classnames/bind';
 import BannerSlide from '../../molecules/BannerSlide';
 import { Carousel } from 'bootstrap';
 import ContactModal from '../ContactModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSettingListByKeyRequest } from '../../../features/setting/settingSlice';
+import styles from './BannerCarousel.module.scss';
+
+const cx = classNames.bind(styles);
 
 export default function BannerCarousel() {
   const dispatch = useDispatch();
@@ -21,7 +25,6 @@ export default function BannerCarousel() {
   const carouselRef = useRef(null);
   const trackRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const isAnimating = useRef(false);
   const startX = useRef(0);
@@ -118,10 +121,10 @@ export default function BannerCarousel() {
   if (!slideData.length) return null; // Check theo slideData đã parse
 
   return (
-    <div className="content-img">
+    <div className={cx('content-img')}>
       <div
         id="myCarousel"
-        className="carousel slide"
+        className={cx('carousel','slide')}
         data-bs-ride="carousel"
         data-bs-interval="3000"
         ref={carouselRef}
@@ -132,38 +135,32 @@ export default function BannerCarousel() {
           msUserSelect: 'none'
         }}
       >
-        <div className="carousel-inner">
+        <div className={cx('carousel-inner', 'content-img-inner')}>
           {slideData.map((slide, index) => {
             return (
               <BannerSlide
-                key={index} // Data không có ID, dùng index làm key
+                key={index}
                 isActive={index === activeIndex}
                 bgUrl={slide.image}
                 title={slide.title}
-                description={slide.description} // Sửa .desc thành .description
-                onOpenModal={() => setIsModalOpen(true)}
+                description={slide.description}
+                link = {slide?.target}
               />
             );
           })}
         </div>
       </div>
 
-      <div id="progressTrack" ref={trackRef} onClick={handleTrackClick}>
+      <div id="progressTrack" className={cx('content-img-progressTrack')} ref={trackRef} onClick={handleTrackClick}>
         <div
           id="progressFill"
+          className={cx('content-img-progressFill')}
           style={{
             width: `${segment}%`,
-            left: `${activeIndex * segment}%`,
-            position: 'relative',
-            transition: 'left 0.3s ease-in-out'
+            left: `${activeIndex * segment}%`
           }}
         ></div>
       </div>
-
-      <ContactModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
     </div>
   );
 }

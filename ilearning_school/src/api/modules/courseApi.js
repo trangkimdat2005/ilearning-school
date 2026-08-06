@@ -9,7 +9,7 @@ const courseApi = {
    * @param {Object} params.pageable
    */
   getList: ({ criteria = {}, pageable = {} }) => {
-    const { page = 0, size = 10, sort = [] } = pageable;
+    const { page = 0, size = 100, sort = [] } = pageable;
 
     return axiosClient.get(ENDPOINTS.COURSE.LIST, {
       params: {

@@ -9,7 +9,7 @@ const syllabusApi = {
    * @param {Object} params.pageable
    */
   getPublicList: ({ criteria = {}, pageable = {} }) => {
-    const { page = 0, size = 10, sort = [] } = pageable;
+    const { page = 0, size = 100, sort = [] } = pageable;
 
     return axiosClient.get(ENDPOINTS.SYLLABUS.PUBLIC_LIST, {
       params: {

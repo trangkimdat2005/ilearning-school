@@ -4,7 +4,12 @@ import './CourseDetailCard.module.scss';
 import CourseInfo from '../../molecules/CourseInfo';
 import CurriculumItem from '../../molecules/CurriculumItem';
 import { getFileUrl } from '../../../utils/fileUrl'
+import ContactModal from '../ContactModal';
 import { fetchSyllabusListRequest } from '../../../features/syllabus/syllabusSlice';
+import classNames from 'classnames/bind';
+import styles from './CourseDetailCard.module.scss';
+
+const cx = classNames.bind(styles);
 
 export default function CourseDetailCard({ classroomId }) {
 
@@ -13,28 +18,11 @@ export default function CourseDetailCard({ classroomId }) {
   );
 
   if (!classroom) return null;
-
-
-
-
-
   const dispatch = useDispatch();
   const { list: syllabusList, loading, error, totalElements, urlBase } = useSelector((state) => state.syllabus);
-
-  useEffect(() => {
-    dispatch(
-      fetchSyllabusListRequest({
-        criteria: { courseId: classroom.course.id },
-        pageable: { page: 0, size: 10, sort: 'id,desc' },
-      })
-    );
-  }, [dispatch]);
-
-
-
-
-
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const handleXemThem = () => {
     setIsExpanded(!isExpanded);
@@ -45,10 +33,10 @@ export default function CourseDetailCard({ classroomId }) {
   };
 
   return (
-    <div className="content-3">
-      <div className="content-3-top">
-        <div className="content-3-left">
-          <img className="content-3-top-img" src={getFileUrl(classroom.course.avatar)} alt="Project Experience" />
+    <div className={cx('content-3')}>
+      <div className={cx('content-3-top')}>
+        <div className={cx('content-3-left')}>
+          <img className={cx('content-3-top-img')} src={getFileUrl(classroom.course.avatar)} alt="Project Experience" />
         </div>
 
 
@@ -59,50 +47,25 @@ export default function CourseDetailCard({ classroomId }) {
       </div>
 
       {isExpanded && (
-        <div className="content-3-bottom">
+        <div className={cx('content-3-bottom')}>
           <h4>Giáo trình</h4>
-          <div className="content-3-box">
-            {loading ? (
-              <>
-                <p>Đang tải...</p>
-                {console.log('Loading...')}
-              </>
-            ) : error ? (
-              <>
-                <p>Lỗi: {error}</p>
-                {console.log('Error:', error)}
-              </>
-            ) : !syllabusList || syllabusList.length === 0 ? (
-              null
-            ) : (
-              syllabusList.map((section, index) => {
-                const descriptionItems = section.description
-                  ? section.description.split('\n').filter(Boolean)
-                  : [];
-
-                return (
-                  <CurriculumItem
-                    key={index}
-                    syllabusId={section.id}
-                  >
-                    {descriptionItems.length > 0 && (
-                      <ul>
-                        {descriptionItems.map((item, itemIndex) => (
-                          <li className='line-clamp-1' key={itemIndex}>{item.trim()}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </CurriculumItem>
-                );
-              })
-            )}
+          <div className={cx('content-3-box')}>
+            <CurriculumItem
+            courseId={classroom.course.id}
+            >
+            </CurriculumItem>
           </div>
 
-          <div className="content-3-bottom-button">
-            <button onClick={handleDangKy}>Đăng ký ngay</button>
+          <div className={cx('content-3-bottom-button')}>
+            <button onClick={() => setIsModalOpen(true)}>Đăng ký ngay</button>
           </div>
         </div>
       )}
+
+      <ContactModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }

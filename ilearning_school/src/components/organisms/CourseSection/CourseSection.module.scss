@@ -2,3 +2,31 @@
 // Placeholder for CourseSection organism scoped styles.
 // Global styles are defined in GlobalStyles.scss (.courses-list-section, etc.)
 // Add component-specific overrides here as needed.
+
+
+.courses-list-section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: clamp(var(--spacing-xl-mid), 5.56vw, var(--spacing-4xl));
+    max-width: 1440px;
+    width: 100%;
+
+    .content-button-all-lean {
+        font-size: clamp(1.125rem, calc(0.4vw + 1.02rem), 1.5rem);
+        font-weight: 500;
+        width: clamp(11.51rem, calc(5.77vw + 10.02rem), 16.875rem);
+        height: clamp(3.125rem, calc(1.34vw + 2.78rem), 4.375rem);
+        background-color: var(--primary-color);
+        color: var(--text-main);
+        border-radius: var(--radius-lg);
+        border: 0;
+    }
+
+    @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(var(--spacing-xl-mid), 5.56vw, var(--spacing-4xl));
+        gap: 30px;
+    }
+}

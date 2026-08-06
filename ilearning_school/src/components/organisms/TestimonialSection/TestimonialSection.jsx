@@ -1,13 +1,17 @@
 import { useState, useEffect, useMemo } from 'react';
+import classNames from 'classnames/bind';
 import TestimonialCard from '../../molecules/TestimonialCard';
-// import { testimonialsList } from '../../../data/testimonialsData'; // Bỏ nếu không dùng đến
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRatingListRequest } from '../../../features/rating/ratingSlice';
+import styles from './TestimonialSection.module.scss';
+
+const cx = classNames.bind(styles);
 
 export default function TestimonialSection() {
   const dispatch = useDispatch();
-  const { list: ratingList, loading, error, totalElements, urlBase } = useSelector((state) => state.rating);
+  const { list: ratingList, loading, error } = useSelector((state) => state.rating);
   const [isMobile, setIsMobile] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const carouselId = "testimonial-slide";
 
   useEffect(() => {
@@ -19,7 +23,7 @@ export default function TestimonialSection() {
     );
   }, [dispatch]);
 
-  // Lắng nghe kích thước màn hình để chuyển đổi số lượng item trên 1 slide
+  // Lắng nghe kích thước màn hình
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -30,7 +34,7 @@ export default function TestimonialSection() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // HÀM GOM NHÓM DỮ LIỆU (Chunk Array)
+  // HÀM GOM NHÓM DỮ LIỆU
   const groupedTestimonials = useMemo(() => {
     if (!ratingList || ratingList.length === 0) return [];
 
@@ -38,55 +42,72 @@ export default function TestimonialSection() {
     const chunks = [];
 
     for (let i = 0; i < ratingList.length; i += chunkSize) {
-      let chunk = ratingList.slice(i, i + chunkSize);
-
-      // Nếu đang ở PC, mảng gốc có hơn 3 thẻ, và slide hiện tại bị thiếu thẻ (lẻ 1 hoặc 2)
-      if (!isMobile && ratingList.length > 3 && chunk.length < chunkSize) {
-        // Lấy thêm các thẻ từ đầu danh sách để đắp vào cho đủ 3
-        const deficit = chunkSize - chunk.length;
-        chunk = [...chunk, ...ratingList.slice(0, deficit)];
-      }
-
+      const chunk = ratingList.slice(i, i + chunkSize);
       chunks.push(chunk);
     }
+
     return chunks;
-  }, [isMobile, ratingList]); // Thêm ratingList vào dependency
+  }, [isMobile, ratingList]);
+
+  // Lắng nghe sự kiện chuyển slide của Bootstrap để cập nhật activeIndex
+  useEffect(() => {
+    const carouselElement = document.getElementById(carouselId);
+
+    const handleSlide = (event) => {
+      setActiveIndex(event.to);
+    };
+
+    if (carouselElement) {
+      carouselElement.addEventListener('slid.bs.carousel', handleSlide);
+    }
+
+    return () => {
+      if (carouselElement) {
+        carouselElement.removeEventListener('slid.bs.carousel', handleSlide);
+      }
+    };
+  }, [groupedTestimonials]);
 
   if (loading) return <p>Đang tải...</p>;
   if (error) {
     console.log('Error:', error);
     return <p>Lỗi: {error}</p>;
   }
-  
+
   if (!ratingList?.length) return null;
 
-  return (
-    <div className="content-5">
-      <div id={carouselId} className="carousel slide" data-bs-ride="carousel">
+  const isFirstSlide = activeIndex === 0;
+  const isLastSlide = activeIndex === groupedTestimonials.length - 1;
 
-        {/* CÁC NÚT INDICATOR (Chấm tròn ở dưới) */}
+  return (
+    <div className={cx('content-5')}>
+      <div id={carouselId} className={cx('carousel', 'slide')} data-bs-interval="false" data-bs-wrap="false">
+
         {groupedTestimonials.length > 1 && (
-          <div className="carousel-indicators content-5-btn-indicators">
+          <div className={cx('carousel-indicators', 'content-5-btn-indicators')}>
             {groupedTestimonials.map((_, index) => (
               <button
                 key={`indicator-${index}`}
                 type="button"
                 data-bs-target={`#${carouselId}`}
                 data-bs-slide-to={index}
-                className={index === 0 ? "active" : ""}
+                className={index === activeIndex ? "active" : ""}
+                aria-current={index === activeIndex ? "true" : "false"}
               ></button>
             ))}
           </div>
         )}
 
-        {/* NỘI DUNG SLIDE */}
-        <div className="carousel-inner content-5-inner">
+        <div className={cx('carousel-inner', 'content-5-inner')}>
           {groupedTestimonials.map((rating, index) => (
-            <div key={index} className={`carousel-item  ${index === 0 ? "active" : ""} px` }>
-              <div className="row justify-content-center content-5-slide">
+            <div key={index} className={cx('carousel-item', { active: index === 0 })}>
+              <div className={cx('row', 'content-5-slide')}>
                 {rating.map((item, itemIndex) => (
-                  // Dùng item.id kết hợp index nếu thẻ bị lặp lại để tránh lỗi duplicate key của React
-                  <div key={`${item.id}-${itemIndex}`} className={`${isMobile ? "col-12" : "col-md-4"} content-5-inner-item`}>
+                  <div key={`${item.id}-${itemIndex}`} className={cx('content-5-inner-item', {
+                    'col-12': isMobile,
+                    'col-md-4': !isMobile
+                  })}
+                  >
                     <TestimonialCard testimonial={item} />
                   </div>
                 ))}
@@ -95,23 +116,24 @@ export default function TestimonialSection() {
           ))}
         </div>
 
-        {/* NÚT ĐIỀU HƯỚNG */}
         {groupedTestimonials.length > 1 && (
           <>
             <button
-              className="carousel-control-prev content-5-button-prev"
+              className={cx('carousel-control-prev', 'content-5-button-prev', { disabled: isFirstSlide })}
               type="button"
               data-bs-target={`#${carouselId}`}
               data-bs-slide="prev"
+              disabled={isFirstSlide}
             >
               <span aria-hidden="true">&#10094;</span>
             </button>
 
             <button
-              className="carousel-control-next content-5-button-next"
+              className={cx('carousel-control-next', 'content-5-button-next', { disabled: isLastSlide })}
               type="button"
               data-bs-target={`#${carouselId}`}
               data-bs-slide="next"
+              disabled={isLastSlide}
             >
               <span aria-hidden="true">&#10095;</span>
             </button>

@@ -21,6 +21,11 @@
     padding-right: clamp(0.625rem, calc(0.84vw + 0.22rem), 0.9375rem);
     flex: 1;
 
+    .header-search {
+        display: flex;
+        align-items: center;
+    }
+
     img {
         width: clamp(0.875rem, calc(1.51vw + 0.15rem), 1.4375rem);
         height: clamp(0.875rem, calc(1.51vw + 0.15rem), 1.4375rem);
@@ -34,6 +39,9 @@
         transition: all 0.3s ease;
         background-color: transparent;
         color: var(--text-muted);
+        font-size: clamp(0.625rem, 0.41rem + 0.84vw, 1.125rem);
+        color: var(--text-header);
+        font-weight: 300;
     }
 
     @media (max-width: 768px) {
