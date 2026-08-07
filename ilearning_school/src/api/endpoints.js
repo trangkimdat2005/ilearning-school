@@ -21,4 +21,7 @@ export const ENDPOINTS = {
     PUBLIC_LIST: '/setting/public',
     FIND_BY_KEY: '/setting/find-by-key',
   },
+  REGISTRATION: {
+    CREATE: '/registration/create'
+  }
 };

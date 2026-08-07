@@ -8,6 +8,7 @@ import classroomReducer from '../features/classroom/classroomSlice';
 import syllabusReducer from '../features/syllabus/syllabusSlice'; // import reducer của syllabus
 import ratingReducer from '../features/rating/ratingSlice'; // import reducer của rating
 import settingReducer from '../features/setting/settingSlice'; // import reducer của setting
+import registrationReducer from '../features/registration/registrationSlice';
 
 import rootSaga from './rootSaga';
 
@@ -23,6 +24,7 @@ export const store = configureStore({
     syllabus: syllabusReducer,
     rating: ratingReducer,
     setting: settingReducer,
+    registration: registrationReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),

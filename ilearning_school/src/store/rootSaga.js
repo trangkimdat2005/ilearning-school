@@ -7,6 +7,7 @@ import classroomSaga from '../features/classroom/classroomSaga'; // import saga 
 import syllabusSaga from '../features/syllabus/syllabusSaga'; // import saga của syllabus
 import ratingSaga from '../features/rating/ratingSaga'; // import saga của rating
 import settingSaga from '../features/setting/settingSaga'; // import saga của setting
+import registrationSaga from '../features/registration/registrationSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -18,6 +19,7 @@ export default function* rootSaga() {
     syllabusSaga(),
     ratingSaga(),
     settingSaga(),
+    registrationSaga(),
     // thêm các saga khác ở đây
   ]);
 }

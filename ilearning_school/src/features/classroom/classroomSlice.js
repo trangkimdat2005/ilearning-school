@@ -18,8 +18,12 @@ const classroomSlice = createSlice({
         },
         fetchClassroomListSuccess: (state, action) => {
             state.loading = false;
-            const { data, urlBase } = action.payload;
-            state.list = data?.content || [];
+            const { data, urlBase, page} = action.payload;
+            if (page === 0) {
+                state.list = data?.content || [];
+            } else {
+                state.list = [...state.list, ...(data?.content || [])];
+            }
             state.totalElements = data?.totalElements || 0;
             state.totalPages = data?.totalPages || 0;
             state.urlBase = urlBase || '';

@@ -10,45 +10,51 @@ const cx = classNames.bind(styles);
 
 export default function CourseSection() {
   const dispatch = useDispatch();
-  const { list: classroomList, totalElements, loading, error } = useSelector((state) => state.classroom);
+  const { list: classroomList, totalPages, loading, error } = useSelector((state) => state.classroom);
 
-  // 1. Kiểm tra kích thước màn hình ngay từ lúc khởi tạo state
+  // 1. Quản lý trạng thái màn hình và trang hiện tại
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
-  const [fetchSize, setFetchSize] = useState(() => window.innerWidth < 768 ? 3 : 5);
+  const [currentPage, setCurrentPage] = useState(0);
 
-  // 2. Lắng nghe kích thước màn hình khi người dùng kéo/thu nhỏ cửa sổ
+  const pageSize = isMobile ? 3 : 5;
+
+  // 2. Lắng nghe thay đổi màn hình (Chỉ reset khi giao cắt giữa PC và Mobile)
   useEffect(() => {
     const handleResize = () => {
-      const isCurrentlyMobile = window.innerWidth < 768;
-      setIsMobile(isCurrentlyMobile);
+      const currentlyMobile = window.innerWidth < 768;
       
-      // Nếu đổi từ Mobile (đang hiện 3) sang PC, ép nó lên 5
-      // Nếu từ PC (đang hiện 5) sang Mobile, giữ nguyên 5 (không làm mất khóa học user đang xem)
-      setFetchSize((prev) => Math.max(prev, isCurrentlyMobile ? 3 : 5));
+      if (currentlyMobile !== isMobile) {
+        setIsMobile(currentlyMobile);
+        setCurrentPage(0);
+      }
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [isMobile]);
 
-  const step = isMobile ? 3 : 5;
-
-  // 3. Gọi API MỖI KHI `fetchSize` thay đổi
+  // 3. Gọi API MỖI KHI `currentPage` hoặc `pageSize` thay đổi
   useEffect(() => {
     dispatch(
       fetchClassroomListRequest({
         criteria: {},
-        pageable: { page: 0, size: fetchSize, sort: 'id,desc' }, 
+        pageable: { 
+          page: currentPage, 
+          size: pageSize, 
+          sort: 'id,desc' 
+        },
+        page: currentPage 
       })
     );
-  }, [dispatch, fetchSize]);
+  }, [dispatch, currentPage, pageSize]);
 
   // 4. Xử lý khi ấn nút "Xem thêm"
   const handleLoadMore = () => {
-    setFetchSize((prevCount) => prevCount + step);
+    setCurrentPage((prevPage) => prevPage + 1);
   };
 
-  if (loading && (!classroomList || classroomList.length === 0)) {
+  // 5. UX: Tránh nhấp nháy UI - Chỉ hiện "Đang tải" nếu là trang đầu tiên và chưa có dữ liệu
+  if (loading && currentPage === 0 && (!classroomList || classroomList.length === 0)) {
     return <p>Đang tải...</p>;
   }
 
@@ -67,7 +73,8 @@ export default function CourseSection() {
         />
       ))}
 
-      {classroomList.length < totalElements && (
+      {/* Dùng totalPages: Nếu trang hiện tại nhỏ hơn trang cuối cùng thì mới hiện nút "Xem thêm" */}
+      {currentPage < totalPages - 1 && (
         <Button 
           className={cx('content-button-all-lean')} 
           onClick={handleLoadMore}

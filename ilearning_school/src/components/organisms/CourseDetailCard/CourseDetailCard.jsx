@@ -72,6 +72,7 @@ export default function CourseDetailCard({ classroomId }) {
       )}
 
       <ContactModal
+        classroomId={classroomId}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
