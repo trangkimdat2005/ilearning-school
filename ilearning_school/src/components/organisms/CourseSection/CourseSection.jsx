@@ -72,8 +72,6 @@ export default function CourseSection() {
           classroomId={classroom.id}
         />
       ))}
-
-      {/* Dùng totalPages: Nếu trang hiện tại nhỏ hơn trang cuối cùng thì mới hiện nút "Xem thêm" */}
       {currentPage < totalPages - 1 && (
         <Button 
           className={cx('content-button-all-lean')} 
