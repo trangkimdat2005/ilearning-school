@@ -6,7 +6,7 @@ const settingApi = {
   getPublicList: () => {
     return axiosClient.get(ENDPOINTS.SETTING.PUBLIC_LIST);
   },
-    findByKey: (keyValue) => {
+  findByKey: (keyValue) => {
     return axiosClient.get(ENDPOINTS.SETTING.FIND_BY_KEY, {
       params: { keyNames: keyValue },
     });

@@ -5,7 +5,7 @@ import styles from './ContactModal.module.scss';
 
 const cx = classNames.bind(styles);
 
-export default function ContactModal({ isOpen, onClose }) {
+export default function ContactModal({ isOpen, onClose, classroomId}) {
 
   useEffect(() => {
     if (isOpen) {
@@ -43,7 +43,7 @@ export default function ContactModal({ isOpen, onClose }) {
                 <h2 className={cx('modal-title')}>Thông tin liên hệ</h2>
               </div>
 
-              <ContactForm />
+              <ContactForm onClose={onClose} classroomId={classroomId} />
 
             </div>
           </div>
